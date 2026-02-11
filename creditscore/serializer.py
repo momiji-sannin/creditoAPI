@@ -8,10 +8,19 @@ class ClientSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'gender', 'age', 'monthly_income', 'rfc']
 
 
-class Application(serializers.ModelSerializer):
+class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Application
         fields = ['id', 'created_at', 'client']
+    client = serializers.HyperlinkedRelatedField(
+        queryset=Client.objects.all(),
+        view_name='client-detail'
+    )
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =  Address
+        fields = ['id', 'street', 'city', 'zip', 'client']
     client = serializers.HyperlinkedRelatedField(
         queryset=Client.objects.all(),
         view_name='client-detail'

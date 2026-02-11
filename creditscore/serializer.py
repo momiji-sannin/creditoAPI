@@ -11,11 +11,18 @@ class ClientSerializer(serializers.ModelSerializer):
 class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Application
-        fields = ['id', 'created_at', 'client']
-    client = serializers.HyperlinkedRelatedField(
-        queryset=Client.objects.all(),
-        view_name='client-detail',
-    )
+        fields = ['id', 'client', 'score', 'created_at',]
+    score = serializers.IntegerField(read_only=True)
+    client = ClientSerializer()
+
+    def create(self, validated_data):
+        client_data = validated_data.pop('client')
+        client_rfc = client_data.pop('rfc')
+        client_model, _ = Client.objects.update_or_create(rfc=client_rfc, defaults=client_data)
+
+        appItem = Application.objects.create(client=client_model, **validated_data)
+
+        return appItem
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:

@@ -33,6 +33,6 @@ class Address(models.Model):
 
 class Application(models.Model):
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
-    score = models.PositiveIntegerField()
+    score = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 

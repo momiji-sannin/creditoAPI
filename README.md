@@ -75,3 +75,8 @@ Ya que así se puede agregar información que sea relevante para los clientes y 
 Para la primary key de las Applicaciones se decidió por usar UUID que se genera automaticámente al momento de subir una aplicacion, asi podria acceder a la consulta de su aplicacion sin dejarla expuesta.
 
 Al momento de que un usario que haya hecho alguna aplicacion previamente, se podra actualizar su informacion sin duplicar informacion. Esto es posible al momento del POST/applications/ checar si el cliente ya existe comparando el RFC ya que único.
+
+
+## Futuras prácticas de Produccion
+
+Este de diseño de modelos se podria aplicar a producción dejando de lado que al momento de subir imagenes se puedan duplicar archivos para un solo cliente, tambien se agregaria una conexion a una nube como "Firebase", "Google Cloud" en donde se puedan almacenar estas imagenes evitando que se creen de manera local. Tambien para futuras practicas se podria una migracion a una DB en yasea MongoDB o MySQL por lo mismo para que no se quede de Manera Local.

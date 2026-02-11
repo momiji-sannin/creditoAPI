@@ -14,7 +14,8 @@ class Client(models.Model):
         max_digits=10, 
         decimal_places=2,
         validators=[MinValueValidator(0)])
-    birth_date = models.DateField(null=True)
+    black_listed = models.BooleanField(default=False)
+    rfc = models.CharField(max_length=255)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

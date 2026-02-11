@@ -14,7 +14,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ['id', 'created_at', 'client']
     client = serializers.HyperlinkedRelatedField(
         queryset=Client.objects.all(),
-        view_name='client-detail'
+        view_name='client-detail',
     )
 
 class AddressSerializer(serializers.ModelSerializer):

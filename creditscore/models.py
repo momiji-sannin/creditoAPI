@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from uuid import uuid4
 
 class Client(models.Model):
     GENDER_CHOICES = [
@@ -32,6 +33,7 @@ class Address(models.Model):
 
 
 class Application(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
     score = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

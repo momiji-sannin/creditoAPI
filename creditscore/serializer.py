@@ -12,6 +12,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Application
         fields = ['id', 'client', 'score', 'created_at',]
+    id = serializers.UUIDField(read_only = True)
     score = serializers.IntegerField(read_only=True)
     client = ClientSerializer()
 
@@ -23,6 +24,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         appItem = Application.objects.create(client=client_model, **validated_data)
 
         return appItem
+
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:

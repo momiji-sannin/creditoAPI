@@ -42,4 +42,13 @@ class DocumentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         client_id = self.context['client_id']
-        return Document.objects.create(client_id=client_id, **validated_data)    
+        return Document.objects.create(client_id=client_id, **validated_data)
+
+class GetStatusApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = ['status', 'score']
+    status = serializers.SerializerMethodField(method_name='get_status')
+
+    def get_status(self, item: Application) -> str:
+        return  "Approved" if item.score > 500 else "Denied"

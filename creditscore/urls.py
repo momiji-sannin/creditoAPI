@@ -11,4 +11,5 @@ application_router.register('documents', views.DocumentViewSet, basename='applic
 urlpatterns = [
     path(r'', include(router.urls)),
     path(r'', include(application_router.urls)),
+    path('applications/<str:app_pk>/score/', views.calculate_score, name="score"),
 ]

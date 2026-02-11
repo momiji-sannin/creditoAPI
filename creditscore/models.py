@@ -35,8 +35,9 @@ class Address(models.Model):
 class Application(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
     client = models.ForeignKey(Client, on_delete=models.PROTECT)
-    score = models.PositiveIntegerField(default=0)
+    score = models.PositiveIntegerField(default=300)
     created_at = models.DateTimeField(auto_now_add=True)
+
 
 class Document(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)

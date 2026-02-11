@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from creditscore.models import Client, Address, Application
+from creditscore.models import Client, Address, Application, Document
 
 
 class ClientSerializer(serializers.ModelSerializer):
@@ -34,3 +34,12 @@ class AddressSerializer(serializers.ModelSerializer):
         queryset=Client.objects.all(),
         view_name='client-detail'
     )
+
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Document
+        fields = ['image', 'name']
+
+    def create(self, validated_data):
+        client_id = self.context['client_id']
+        return Document.objects.create(client_id=client_id, **validated_data)    

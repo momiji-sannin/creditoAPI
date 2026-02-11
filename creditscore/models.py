@@ -38,3 +38,10 @@ class Application(models.Model):
     score = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
+class Document(models.Model):
+    image = models.ImageField(upload_to='images/', blank=True)
+    name = models.CharField(max_length=255)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='documents')
+
+    def __str__(self):
+        return self.name
